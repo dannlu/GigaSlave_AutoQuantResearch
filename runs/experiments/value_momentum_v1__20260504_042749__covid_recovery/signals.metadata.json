@@ -1,0 +1,10 @@
+{
+  "dataset_path": "runs\\cache\\datasets\\value_momentum_v1__20260504_042749__covid_recovery.features.parquet",
+  "output_path": "runs\\cache\\signals\\value_momentum_v1__20260504_042749__covid_recovery.parquet",
+  "rows_in_dataset": 1493514,
+  "rows_in_signals": 1493260,
+  "num_dates": 486,
+  "num_stocks": 4169,
+  "score_min": 0.0003055300947143458,
+  "score_max": 0.9996983408748115
+}

@@ -1,0 +1,32 @@
+{
+  "config": {
+    "trade_date_col": "trade_date",
+    "gross_return_col": "portfolio_return",
+    "net_return_col": "portfolio_net_return",
+    "turnover_col": "turnover",
+    "equity_col": "equity_curve",
+    "periods_per_year": 12,
+    "risk_free_rate_annual": 0.0,
+    "turnover_penalty": 0.1,
+    "drawdown_soft_limit": 0.2,
+    "drawdown_penalty": 2.0,
+    "min_rebalances": 6,
+    "short_history_penalty": 0.5,
+    "score_name": "score"
+  },
+  "n_periods": 24,
+  "date_min": "2022-01-28",
+  "date_max": "2023-12-29",
+  "avg_gross_return": -0.001142232263804498,
+  "avg_net_return": -0.0034397322638045,
+  "annualized_return": -0.056193323972216325,
+  "annualized_volatility": 0.18710640023712247,
+  "sharpe": -0.22060596063706728,
+  "sortino": -0.45727989346210907,
+  "max_drawdown": 0.2200691705066904,
+  "hit_rate": 0.4166666666666667,
+  "avg_turnover": 1.531666666666667,
+  "penalty_turnover": 0.1531666666666667,
+  "penalty_drawdown": 0.04013834101338076,
+  "score": -0.4139109683171147
+}

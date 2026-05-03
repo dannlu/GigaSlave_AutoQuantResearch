@@ -1,0 +1,29 @@
+{
+  "config": {
+    "label_col": "ret_20d_fwd",
+    "trade_date_col": "trade_date",
+    "asset_col": "ts_code",
+    "price_col": "close",
+    "score_col": "score",
+    "weight_col": "weight",
+    "tradable_col": "is_tradable",
+    "split_col": "split",
+    "rebalance_frequency": "monthly",
+    "portfolio_type": "long_only",
+    "long_quantile": 0.1,
+    "short_quantile": 0.1,
+    "max_positions": 50,
+    "min_positions": 5,
+    "use_tradable_only": true,
+    "use_equal_weight_if_missing": true,
+    "transaction_cost_bps": 10.0,
+    "slippage_bps": 5.0,
+    "evaluation_split": null,
+    "output_return_col": "portfolio_return",
+    "output_net_return_col": "portfolio_net_return"
+  },
+  "n_book_rows": 1200,
+  "n_rebalances": 24,
+  "date_min": "2022-01-28",
+  "date_max": "2023-12-29"
+}

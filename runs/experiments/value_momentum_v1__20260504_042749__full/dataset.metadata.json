@@ -1,0 +1,69 @@
+{
+  "strategy_name": "value_momentum_v1",
+  "evaluation_profile": "monthly_20d",
+  "horizon_rationale": "This strategy combines valuation, profitability, and medium-term momentum, so a monthly rebalance with a 20-trading-day forward return horizon is the most natural evaluation profile.",
+  "request_path": "D:\\HKU\\bigdatainfinance\\niggaletsdothis\\project\\requests\\runs\\baseline_value_momentum.json",
+  "protocol_path": "D:\\HKU\\bigdatainfinance\\niggaletsdothis\\project\\config\\experiment_protocol.json",
+  "source_db": "D:\\HKU\\bigdatainfinance\\niggaletsdothis\\project\\data\\data.db",
+  "output_path": "D:\\HKU\\bigdatainfinance\\niggaletsdothis\\project\\runs\\cache\\datasets\\value_momentum_v1__20260504_042749__full.parquet",
+  "row_count": 7912493,
+  "column_count": 23,
+  "columns": [
+    "ts_code",
+    "trade_date",
+    "close",
+    "vol",
+    "amount",
+    "turnover_rate",
+    "pb",
+    "pe_ttm",
+    "total_mv",
+    "fin_roe",
+    "fin_netprofit_yoy",
+    "name",
+    "industry",
+    "market",
+    "list_date",
+    "mom_60",
+    "ma_20",
+    "pb_rank",
+    "ret_20d_fwd",
+    "bench_ret_20d_fwd",
+    "excess_ret_20d_fwd",
+    "is_tradable",
+    "days_since_listed"
+  ],
+  "date_window": "full",
+  "date_range": {
+    "start_date": "2016-01-04",
+    "end_date": "2025-12-31"
+  },
+  "official_date_range": {
+    "start_date": "2016-01-04",
+    "end_date": "2025-12-31"
+  },
+  "data_load_range": {
+    "start_date": "2016-01-04",
+    "end_date": "2026-03-31"
+  },
+  "label_buffer_calendar_days": 90,
+  "benchmark": "000906.SH",
+  "benchmark_name": "中证800",
+  "label": "ret_20d_fwd",
+  "horizon": 20,
+  "profile": {
+    "description": "Monthly strategy. Rebalance monthly and evaluate next-20-trading-day forward returns.",
+    "label_col": "ret_20d_fwd",
+    "benchmark_label_col": "bench_ret_20d_fwd",
+    "excess_label_col": "excess_ret_20d_fwd",
+    "rebalance_frequency": "monthly",
+    "periods_per_year": 12,
+    "expected_holding_days": 20
+  },
+  "requested_tables": [
+    "stock_bar",
+    "daily_basic",
+    "fina_indicator",
+    "stock_basic"
+  ]
+}

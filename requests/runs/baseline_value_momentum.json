@@ -1,0 +1,57 @@
+{
+  "strategy_name": "value_momentum_v1",
+  "description": "Baseline value-quality-momentum strategy. Cheap stocks with positive medium-term momentum and decent profitability.",
+  "evaluation_profile": "monthly_20d",
+  "horizon_rationale": "This strategy combines valuation, profitability, and medium-term momentum, so a monthly rebalance with a 20-trading-day forward return horizon is the most natural evaluation profile.",
+  "tables": {
+    "stock_bar": [
+      "close",
+      "vol",
+      "amount"
+    ],
+    "daily_basic": [
+      "turnover_rate",
+      "pb",
+      "pe_ttm",
+      "total_mv"
+    ],
+    "fina_indicator": [
+      "roe",
+      "netprofit_yoy"
+    ],
+    "stock_basic": [
+      "name",
+      "industry",
+      "market",
+      "list_date"
+    ]
+  },
+  "universe": {
+    "tradable_only": true,
+    "include_st": false,
+    "min_days_listed": 120,
+    "min_price": 2.0,
+    "min_amount": 20000.0
+  },
+  "derived_features": [
+    {
+      "type": "pct_change",
+      "column": "close",
+      "window": 60,
+      "name": "mom_60"
+    },
+    {
+      "type": "rolling_mean",
+      "column": "close",
+      "window": 20,
+      "name": "ma_20"
+    },
+    {
+      "type": "rank",
+      "column": "pb",
+      "groupby": "trade_date",
+      "name": "pb_rank"
+    }
+  ],
+  "notes": "Baseline value-momentum request used as the initial reference run. This strategy is kinda trash but serves as a sanity check for the evaluation framework."
+}

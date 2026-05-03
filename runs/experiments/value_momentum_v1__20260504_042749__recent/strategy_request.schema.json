@@ -1,0 +1,239 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "strategy_request.schema.json",
+  "title": "Quant Strategy Data Request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "strategy_name",
+    "evaluation_profile",
+    "horizon_rationale",
+    "tables",
+    "universe",
+    "derived_features"
+  ],
+  "properties": {
+    "strategy_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 2000
+    },
+    "evaluation_profile": {
+      "type": "string",
+      "enum": [
+        "daily_1d",
+        "weekly_5d",
+        "monthly_20d"
+      ],
+      "description": "Agent-selected approved horizon profile. The actual label, rebalance frequency, annualization factor, and benchmark are resolved from config/experiment_protocol.json."
+    },
+    "horizon_rationale": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1200,
+      "description": "Short explanation of why the selected evaluation_profile matches the proposed strategy."
+    },
+    "tables": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "stock_bar": {
+          "$ref": "#/$defs/columnList"
+        },
+        "daily_basic": {
+          "$ref": "#/$defs/columnList"
+        },
+        "fina_indicator": {
+          "$ref": "#/$defs/columnList"
+        },
+        "stock_basic": {
+          "$ref": "#/$defs/columnList"
+        },
+        "sw_industry": {
+          "$ref": "#/$defs/columnList"
+        },
+        "index_data": {
+          "$ref": "#/$defs/columnList"
+        }
+      }
+    },
+    "universe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tradable_only",
+        "include_st",
+        "min_days_listed"
+      ],
+      "properties": {
+        "tradable_only": {
+          "type": "boolean"
+        },
+        "include_st": {
+          "type": "boolean"
+        },
+        "min_days_listed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "min_price": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "min_amount": {
+          "type": "number",
+          "minimum": 0
+        },
+        "markets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "derived_features": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/derivedFeature"
+      },
+      "maxItems": 100
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 4000
+    }
+  },
+  "$defs": {
+    "columnList": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "derivedFeature": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "column",
+            "window",
+            "name"
+          ],
+          "properties": {
+            "type": {
+              "const": "pct_change"
+            },
+            "column": {
+              "type": "string"
+            },
+            "window": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "column",
+            "window",
+            "name"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "rolling_mean",
+                "rolling_std"
+              ]
+            },
+            "column": {
+              "type": "string"
+            },
+            "window": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "column",
+            "name"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "zscore",
+                "rank",
+                "diff"
+              ]
+            },
+            "column": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "groupby": {
+              "type": "string",
+              "enum": [
+                "trade_date",
+                "ts_code",
+                "sw_l1_name",
+                "sw_l2_name",
+                "sw_l3_name",
+                "industry"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "numerator",
+            "denominator",
+            "name"
+          ],
+          "properties": {
+            "type": {
+              "const": "ratio"
+            },
+            "numerator": {
+              "type": "string"
+            },
+            "denominator": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

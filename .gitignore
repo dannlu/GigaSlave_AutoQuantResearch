@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+.env
+
+# Raw / heavy data
+data/*.db
+*.duckdb
+*.sqlite
+*.sqlite3
+*.parquet
+*.pkl
+*.pickle
+
+# Temporary cache
+runs/cache/
+cache/
+artifacts/
+
+# Local editor / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Zip backups
+*.zip

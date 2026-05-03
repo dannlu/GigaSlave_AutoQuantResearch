@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "experiment_protocol.json",
+  "title": "Fixed Quant Experiment Protocol",
+  "version": 1,
+  "description": "Human-controlled protocol for strategy evaluation. Agents may choose an approved evaluation_profile, but may not define arbitrary labels, rebalance rules, date ranges, benchmarks, or annualization settings.",
+  "benchmark": {
+    "ts_code": "000906.SH",
+    "name": "中证800",
+    "note": "This benchmark is confirmed to exist in the local index_data table."
+  },
+  "default_evaluation_profile": "monthly_20d",
+  "allowed_evaluation_profiles": {
+    "daily_1d": {
+      "description": "Short-horizon daily strategy. Rebalance daily and evaluate next-1-trading-day forward returns.",
+      "label_col": "ret_1d_fwd",
+      "benchmark_label_col": "bench_ret_1d_fwd",
+      "excess_label_col": "excess_ret_1d_fwd",
+      "rebalance_frequency": "daily",
+      "periods_per_year": 242,
+      "expected_holding_days": 1
+    },
+    "weekly_5d": {
+      "description": "Weekly strategy. Rebalance weekly and evaluate next-5-trading-day forward returns.",
+      "label_col": "ret_5d_fwd",
+      "benchmark_label_col": "bench_ret_5d_fwd",
+      "excess_label_col": "excess_ret_5d_fwd",
+      "rebalance_frequency": "weekly",
+      "periods_per_year": 52,
+      "expected_holding_days": 5
+    },
+    "monthly_20d": {
+      "description": "Monthly strategy. Rebalance monthly and evaluate next-20-trading-day forward returns.",
+      "label_col": "ret_20d_fwd",
+      "benchmark_label_col": "bench_ret_20d_fwd",
+      "excess_label_col": "excess_ret_20d_fwd",
+      "rebalance_frequency": "monthly",
+      "periods_per_year": 12,
+      "expected_holding_days": 20
+    }
+  },
+  "primary_date_window": "full",
+  "robustness_date_windows": [
+    "pre_covid",
+    "covid_recovery",
+    "post_covid",
+    "recent"
+  ],
+  "date_windows": {
+    "full": {
+      "start_date": "2016-01-04",
+      "end_date": "2025-12-31",
+      "description": "Primary full evaluation window using complete calendar years and leaving forward-return buffer before the latest available raw data."
+    },
+    "pre_covid": {
+      "start_date": "2016-01-04",
+      "end_date": "2019-12-31",
+      "description": "Pre-COVID market regime."
+    },
+    "covid_recovery": {
+      "start_date": "2020-01-01",
+      "end_date": "2021-12-31",
+      "description": "COVID shock and early recovery period."
+    },
+    "post_covid": {
+      "start_date": "2022-01-01",
+      "end_date": "2023-12-31",
+      "description": "Post-COVID adjustment period."
+    },
+    "recent": {
+      "start_date": "2024-01-01",
+      "end_date": "2025-12-31",
+      "description": "Most recent complete two-year period."
+    }
+  },
+  "fixed_rules": {
+    "agent_may_choose_evaluation_profile": true,
+    "agent_may_define_new_profile": false,
+    "agent_may_change_benchmark": false,
+    "agent_may_define_arbitrary_date_range": false,
+    "agent_may_change_rebalance_frequency_directly": false,
+    "agent_may_change_label_directly": false,
+    "agent_may_change_periods_per_year": false,
+    "primary_score_window": "full",
+    "robustness_windows_are_diagnostic": true
+  },
+  "backtest_defaults": {
+    "portfolio_type": "long_only",
+    "long_quantile": 0.1,
+    "max_positions": 50,
+    "min_positions": 5,
+    "use_tradable_only": true,
+    "transaction_cost_bps": 10.0,
+    "slippage_bps": 5.0,
+    "evaluation_split": null
+  },
+  "evaluation_defaults": {
+    "risk_free_rate_annual": 0.0,
+    "turnover_penalty": 0.1,
+    "drawdown_soft_limit": 0.2,
+    "drawdown_penalty": 2.0,
+    "min_rebalances": 6,
+    "short_history_penalty": 0.5,
+    "score_name": "score"
+  },
+  "label_buffer_calendar_days": 90
+}
