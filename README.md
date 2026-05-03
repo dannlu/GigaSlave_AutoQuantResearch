@@ -94,7 +94,7 @@ project/
 
 ### `program_zh.md`
 
-This is the instruction file I give to the agent. It explains what the agent can and cannot touch. It is in Chinese since this framework is currently for A-share, and I'm gonna use DS4 (IT IS CHEAP!)
+This is the instruction file I give to the agent. It explains what the agent can and cannot touch. It is in Chinese since this framework is currently for A-share, and I'm gonna use DS4 (it is cheaper)
 
 ### `config/experiment_protocol.json`
 
@@ -195,7 +195,7 @@ It is still rough. The baseline strategy is not impressive. The point of the rep
 
 ## Philosophy
 
-I LOVE SLAVERY.
+Idk. Using agents feel less like a caveman in this age, and can probably find me a job.
 
 ## Contributions / advice
 
